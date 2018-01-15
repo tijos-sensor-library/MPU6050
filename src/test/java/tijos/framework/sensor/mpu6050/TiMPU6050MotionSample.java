@@ -3,8 +3,6 @@ package tijos.framework.sensor.mpu6050;
 import java.io.IOException;
 
 import tijos.framework.devicecenter.TiI2CMaster;
-import tijos.framework.sensor.mpu6050.MpuActivities;
-import tijos.framework.sensor.mpu6050.MpuVector;
 import tijos.framework.sensor.mpu6050.TiMPU6050;
 
 public class TiMPU6050MotionSample {
@@ -43,32 +41,29 @@ public class TiMPU6050MotionSample {
 
 			while (true) {
 				try {
-					MpuVector rawAccel = mpu.readRawAccel();
-					MpuActivities act = mpu.readActivites();
+					Vector rawAccel = mpu.readRawAccel();
+					Activities act = mpu.readActivites();
 
+					System.out.print(act.isActivity);
+					System.out.print(" ");
+					System.out.print(act.isInactivity);
 
+					System.out.print(" ");
+					System.out.print(act.isPosActivityOnX);
+					System.out.print(" ");
+					System.out.print(act.isNegActivityOnX);
+					System.out.print(" ");
 
-					  System.out.print(act.isActivity);
-					  System.out.print(" ");
-					  System.out.print(act.isInactivity);
+					System.out.print(act.isPosActivityOnY);
+					System.out.print(" ");
+					System.out.print(act.isNegActivityOnY);
+					System.out.print(" ");
 
-					  System.out.print(" ");
-					  System.out.print(act.isPosActivityOnX);
-					  System.out.print(" ");
-					  System.out.print(act.isNegActivityOnX);
-					  System.out.print(" ");
+					System.out.print(act.isPosActivityOnZ);
+					System.out.print(" ");
+					System.out.print(act.isNegActivityOnZ);
+					System.out.print("\n");
 
-					  System.out.print(act.isPosActivityOnY);
-					  System.out.print(" ");
-					  System.out.print(act.isNegActivityOnY);
-					  System.out.print(" ");
-
-					  System.out.print(act.isPosActivityOnZ);
-					  System.out.print(" ");
-					  System.out.print(act.isNegActivityOnZ);
-					  System.out.print("\n");
-					 
-					  
 				} catch (IOException ie) {
 					ie.printStackTrace();
 				}

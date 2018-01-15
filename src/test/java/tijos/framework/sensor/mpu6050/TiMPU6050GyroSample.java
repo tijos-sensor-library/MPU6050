@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import tijos.framework.devicecenter.TiI2CMaster;
 import tijos.framework.sensor.mpu6050.TiMPU6050;
-import tijos.framework.sensor.mpu6050.MpuVector;
 import tijos.util.Delay;
 
 public class TiMPU6050GyroSample {
@@ -26,40 +25,40 @@ public class TiMPU6050GyroSample {
 
 			mpu6050.begin(TiMPU6050.MPU6050_SCALE_2000DPS, TiMPU6050.MPU6050_RANGE_2G);
 
-			  // Calibrate gyroscope. The calibration must be at rest.
-			  // If you don't want calibrate, comment this line.
+			// Calibrate gyroscope. The calibration must be at rest.
+			// If you don't want calibrate, comment this line.
 			mpu6050.calibrateGyro(50);
-			  
-			  // Set threshold sensivity. Default 3.
-			  // If you don't want use threshold, comment this line or set 0.
+
+			// Set threshold sensivity. Default 3.
+			// If you don't want use threshold, comment this line or set 0.
 			mpu6050.setThreshold(3);
-			  
+
 			checkSettings(mpu6050);
 
 			int num = 10000;
 			while (num-- > 0) {
 				try {
-					  MpuVector rawGyro = mpu6050.readRawGyro();
-					  MpuVector normGyro = mpu6050.readNormalizeGyro();
+					Vector rawGyro = mpu6050.readRawGyro();
+					Vector normGyro = mpu6050.readNormalizeGyro();
 
-					  System.out.print(" Xraw = ");
-					  System.out.println(rawGyro.XAxis);
-					  
-					  System.out.print(" Yraw = ");
-					  System.out.println(rawGyro.YAxis);
-					  
-					  System.out.print(" Zraw = ");
-					  System.out.println(rawGyro.ZAxis);
+					System.out.print(" Xraw = ");
+					System.out.println(rawGyro.XAxis);
 
-					  System.out.print(" Xnorm = ");
-					  System.out.println(normGyro.XAxis);
-					  
-					  System.out.print(" Ynorm = ");
-					  System.out.println(normGyro.YAxis);
-					  
-					  System.out.print(" Znorm = ");
-					  System.out.println(normGyro.ZAxis);
-					  
+					System.out.print(" Yraw = ");
+					System.out.println(rawGyro.YAxis);
+
+					System.out.print(" Zraw = ");
+					System.out.println(rawGyro.ZAxis);
+
+					System.out.print(" Xnorm = ");
+					System.out.println(normGyro.XAxis);
+
+					System.out.print(" Ynorm = ");
+					System.out.println(normGyro.YAxis);
+
+					System.out.print(" Znorm = ");
+					System.out.println(normGyro.ZAxis);
+
 					Delay.msDelay(5);
 
 				} catch (Exception ex) {

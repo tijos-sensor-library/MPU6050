@@ -3,7 +3,6 @@ package tijos.framework.sensor.mpu6050;
 import java.io.IOException;
 
 import tijos.framework.devicecenter.TiI2CMaster;
-import tijos.framework.sensor.mpu6050.MpuVector;
 import tijos.framework.sensor.mpu6050.TiMPU6050;
 
 public class TiMPU6050AccelPitchRollSample {
@@ -29,21 +28,22 @@ public class TiMPU6050AccelPitchRollSample {
 			while (num-- > 0) {
 				try {
 
-					 // Read normalized values 
-					  MpuVector normAccel = mpu.readNormalizeAccel();
+					// Read normalized values
+					Vector normAccel = mpu.readNormalizeAccel();
 
-					  // Calculate Pitch & Roll
-					  double pitch = -(Math.atan2(normAccel.XAxis, Math.sqrt(normAccel.YAxis*normAccel.YAxis + normAccel.ZAxis*normAccel.ZAxis))*180.0)/Math.PI;
-					  double roll = (Math.atan2(normAccel.YAxis, normAccel.ZAxis)*180.0)/Math.PI;
+					// Calculate Pitch & Roll
+					double pitch = -(Math.atan2(normAccel.XAxis,
+							Math.sqrt(normAccel.YAxis * normAccel.YAxis + normAccel.ZAxis * normAccel.ZAxis)) * 180.0)
+							/ Math.PI;
+					double roll = (Math.atan2(normAccel.YAxis, normAccel.ZAxis) * 180.0) / Math.PI;
 
-					  // Output
-					  System.out.print(" Pitch = ");
-					  System.out.print((int)pitch);
-					  System.out.print(" Roll = ");
-					  System.out.print((int)roll);
-					  
-					  System.out.println();
-					  
+					// Output
+					System.out.print(" Pitch = ");
+					System.out.print((int) pitch);
+					System.out.print(" Roll = ");
+					System.out.print((int) roll);
+
+					System.out.println();
 
 				} catch (Exception ex) {
 

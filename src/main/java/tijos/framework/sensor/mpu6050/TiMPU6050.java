@@ -10,6 +10,27 @@ import tijos.util.BigBitConverter;
  * https://github.com/jarzebski/Arduino-MPU6050
  */
 
+class Vector {
+	public double XAxis;
+	public double YAxis;
+	public double ZAxis;
+}
+
+class Activities {
+
+	public int isOverflow;
+	public int isFreeFall;
+	public int isInactivity;
+	public int isActivity;
+	public int isPosActivityOnX;
+	public int isPosActivityOnY;
+	public int isPosActivityOnZ;
+	public int isNegActivityOnX;
+	public int isNegActivityOnY;
+	public int isNegActivityOnZ;
+	public int isDataReady;
+}
+
 class TiMPU6050Register {
 
 	public static final int MPU6050_REG_ACCEL_XOFFS_H = 0x06;
@@ -129,15 +150,15 @@ public class TiMPU6050 {
 	boolean useCalibrate;
 	int mpuAddress;
 
-	MpuVector ra = new MpuVector();
-	MpuVector rg = new MpuVector(); // Raw vectors
-	MpuVector na = new MpuVector();
-	MpuVector ng = new MpuVector(); // Normalized vectors
-	MpuVector tg = new MpuVector();
-	MpuVector dg = new MpuVector(); // Threshold and Delta for Gyro
-	MpuVector th = new MpuVector(); // Threshold
+	Vector ra = new Vector();
+	Vector rg = new Vector(); // Raw vectors
+	Vector na = new Vector();
+	Vector ng = new Vector(); // Normalized vectors
+	Vector tg = new Vector();
+	Vector dg = new Vector(); // Threshold and Delta for Gyro
+	Vector th = new Vector(); // Threshold
 
-	MpuActivities a = new MpuActivities(); // Activities
+	Activities a = new Activities(); // Activities
 
 	/**
 	 * Initialize object with i2c communication object, default slave address is
@@ -450,7 +471,7 @@ public class TiMPU6050 {
 		return data[0];
 	}
 
-	public MpuActivities readActivites() throws IOException {
+	public Activities readActivites() throws IOException {
 		this.i2cmObj.read(this.i2cSlaveAddr, TiMPU6050Register.MPU6050_REG_INT_STATUS, data, 0, 1);
 		int value = data[0];
 
@@ -475,7 +496,7 @@ public class TiMPU6050 {
 		return a;
 	}
 
-	public MpuVector readRawAccel() throws IOException {
+	public Vector readRawAccel() throws IOException {
 		this.i2cmObj.read(this.i2cSlaveAddr, TiMPU6050Register.MPU6050_REG_ACCEL_XOUT_H, data, 0, 6);
 
 		ra.XAxis = BigBitConverter.ToUInt16(data, 0);
@@ -485,7 +506,7 @@ public class TiMPU6050 {
 		return ra;
 	}
 
-	public MpuVector readNormalizeAccel() throws IOException {
+	public Vector readNormalizeAccel() throws IOException {
 		readRawAccel();
 
 		na.XAxis = ra.XAxis * rangePerDigit * 9.80665f;
@@ -495,7 +516,7 @@ public class TiMPU6050 {
 		return na;
 	}
 
-	public MpuVector readScaledAccel() throws IOException {
+	public Vector readScaledAccel() throws IOException {
 		readRawAccel();
 
 		na.XAxis = ra.XAxis * rangePerDigit;
@@ -505,7 +526,7 @@ public class TiMPU6050 {
 		return na;
 	}
 
-	public MpuVector readRawGyro() throws IOException {
+	public Vector readRawGyro() throws IOException {
 		this.i2cmObj.read(this.i2cSlaveAddr, TiMPU6050Register.MPU6050_REG_GYRO_XOUT_H, data, 0, 6);
 
 		rg.XAxis = BigBitConverter.ToUInt16(data, 0);
@@ -515,7 +536,7 @@ public class TiMPU6050 {
 		return rg;
 	}
 
-	public MpuVector readNormalizeGyro() throws IOException {
+	public Vector readNormalizeGyro() throws IOException {
 		readRawGyro();
 
 		if (useCalibrate) {

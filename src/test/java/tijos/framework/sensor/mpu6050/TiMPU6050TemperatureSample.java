@@ -29,10 +29,10 @@ public class TiMPU6050TemperatureSample {
 			while (num-- > 0) {
 				try {
 
-					  double temp = mpu6050.readTemperature();
+					double temp = mpu6050.readTemperature();
 
-					  System.out.printf("Temp = %.2f *C \n",temp);
-					  
+					System.out.printf("Temp = %.2f *C \n", temp);
+
 					Delay.msDelay(1000);
 
 				} catch (Exception ex) {

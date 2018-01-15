@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import tijos.framework.devicecenter.TiI2CMaster;
 import tijos.framework.sensor.mpu6050.TiMPU6050;
-import tijos.framework.sensor.mpu6050.MpuVector;
 import tijos.util.Delay;
 
 public class TiMPU6050AccelSample {
@@ -27,29 +26,29 @@ public class TiMPU6050AccelSample {
 			mpu6050.begin(TiMPU6050.MPU6050_SCALE_2000DPS, TiMPU6050.MPU6050_RANGE_2G);
 
 			checkSettings(mpu6050);
-			
+
 			int num = 10000;
 			while (num-- > 0) {
 				try {
-					  MpuVector rawAccel = mpu6050.readRawAccel();
-					  MpuVector normAccel = mpu6050.readNormalizeAccel();
+					Vector rawAccel = mpu6050.readRawAccel();
+					Vector normAccel = mpu6050.readNormalizeAccel();
 
-					  System.out.print(" Xraw = ");
-					  System.out.println(rawAccel.XAxis);
-					  System.out.print(" Yraw = ");
-					  System.out.println(rawAccel.YAxis);
-					  System.out.print(" Zraw = ");
+					System.out.print(" Xraw = ");
+					System.out.println(rawAccel.XAxis);
+					System.out.print(" Yraw = ");
+					System.out.println(rawAccel.YAxis);
+					System.out.print(" Zraw = ");
 
-					  System.out.println(rawAccel.ZAxis);
-					  
-					  System.out.print(" Xnorm = ");
-					  System.out.println(normAccel.XAxis);
-					  System.out.print(" Ynorm = ");
-					  System.out.println(normAccel.YAxis);
-					  System.out.print(" Znorm = ");
-					  System.out.println(normAccel.ZAxis);
-					  
-					  Delay.msDelay(5);
+					System.out.println(rawAccel.ZAxis);
+
+					System.out.print(" Xnorm = ");
+					System.out.println(normAccel.XAxis);
+					System.out.print(" Ynorm = ");
+					System.out.println(normAccel.YAxis);
+					System.out.print(" Znorm = ");
+					System.out.println(normAccel.ZAxis);
+
+					Delay.msDelay(5);
 
 				} catch (Exception ex) {
 
