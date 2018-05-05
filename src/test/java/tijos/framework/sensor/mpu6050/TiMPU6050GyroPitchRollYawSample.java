@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import tijos.framework.devicecenter.TiI2CMaster;
 import tijos.framework.sensor.mpu6050.TiMPU6050;
-import tijos.util.Delay;
+import tijos.framework.util.Delay;
 
 public class TiMPU6050GyroPitchRollYawSample {
 

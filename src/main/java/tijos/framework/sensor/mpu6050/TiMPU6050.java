@@ -3,7 +3,7 @@ package tijos.framework.sensor.mpu6050;
 import java.io.IOException;
 
 import tijos.framework.devicecenter.TiI2CMaster;
-import tijos.util.BigBitConverter;
+import tijos.framework.util.BigBitConverter;
 
 /*TiJOS-MPU6050 Triple Axis Gyroscope & Accelerometer  
  * Based on original C library from Ardunio by Jarzębski  
@@ -185,7 +185,7 @@ public class TiMPU6050 {
 	}
 
 	public void begin(int scale, int range) throws IOException {
-		this.i2cmObj.setBaudRate(400);
+		this.i2cmObj.setWorkBaudrate(400);
 
 		// Reset calibrate values
 		dg.XAxis = 0;
